@@ -203,9 +203,9 @@ This project is licensed under the MIT License.
 - React Developer
 - UI/UX Enthusiast
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/Akashmagudeeswaran
 
-LinkedIn: https://linkedin.com/in/your-profile
+LinkedIn:www.linkedin.com/in/akash-magudeeswaran-357763336
 
 ---
 
