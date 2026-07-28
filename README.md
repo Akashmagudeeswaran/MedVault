@@ -24,7 +24,7 @@ This project was developed to improve the efficiency of healthcare services whil
 - Secure Authentication
 - Book Doctor Appointments
 - View Appointment History
-- Access Medical Records
+- Access Medical Records 
 - Update Profile
 
 ### 👨‍⚕️ Doctor
