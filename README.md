@@ -8,7 +8,7 @@
 </p>
 
 ---
-
+ 
 ## 📖 About the Project
 
 **MedVault** is a healthcare web application that enables patients to securely manage their medical information and book appointments with doctors online. The system simplifies healthcare management by providing appointment scheduling, digital medical records, and doctor approval features in one platform.
