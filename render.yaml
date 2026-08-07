@@ -42,12 +42,12 @@ services:
         value: "*" # Allow all origins, or replace with your static site domain after deployment
 
   # 3. Frontend Service (Vite React Client)
-  - type: static
+  - type: web
     name: medvault-frontend
-    env: static
+    runtime: static
     rootDir: frontend
     buildCommand: npm run build
-    publishPath: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         fromService:
