@@ -25,8 +25,9 @@ services:
     dockerfilePath: Dockerfile
     dockerContext: .
     plan: starter # Starter or free can be used
-    port: 8080
     envVars:
+      - key: PORT
+        value: "8080"
       - key: DB_URL
         value: jdbc:mysql://medvault-db:3306/medvault_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - key: DB_USERNAME
