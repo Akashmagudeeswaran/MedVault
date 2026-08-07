@@ -1,6 +1,6 @@
 services:
   # 1. Database Service (MySQL 8)
-  - type: private
+  - type: pserv
     name: medvault-db
     env: docker
     rootDir: database
@@ -33,7 +33,7 @@ services:
         value: root
       - key: DB_PASSWORD
         fromService:
-          type: private
+          type: pserv
           name: medvault-db
           envVarKey: MYSQL_ROOT_PASSWORD
       - key: JWT_SECRET
