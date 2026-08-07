@@ -51,10 +51,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: medvault-backend
-          property: url
+        sync: false # Set this manually to the backend's public URL (e.g., https://medvault-backend-xxxx.onrender.com) once backend is deployed.
     routes:
       - type: rewrite
         source: /*
