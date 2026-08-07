@@ -1,0 +1,60 @@
+services:
+  # 1. Database Service (MySQL 8)
+  - type: private
+    name: medvault-db
+    env: docker
+    rootDir: database
+    dockerfilePath: Dockerfile.db
+    dockerContext: .
+    plan: starter # Private services require a paid instance type on Render
+    envVars:
+      - key: MYSQL_DATABASE
+        value: medvault_db
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 1
+
+  # 2. Backend Service (Spring Boot API)
+  - type: web
+    name: medvault-backend
+    env: docker
+    rootDir: backend
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    plan: starter # Starter or free can be used
+    port: 8080
+    envVars:
+      - key: DB_URL
+        value: jdbc:mysql://medvault-db:3306/medvault_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        fromService:
+          type: private
+          name: medvault-db
+          envVarKey: MYSQL_ROOT_PASSWORD
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: "*" # Allow all origins, or replace with your static site domain after deployment
+
+  # 3. Frontend Service (Vite React Client)
+  - type: static
+    name: medvault-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: medvault-backend
+          property: url
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

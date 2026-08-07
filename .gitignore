@@ -1,0 +1,48 @@
+# Node.js
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Maven Build Artifacts
+target/
+*.jar
+*.war
+*.ear
+
+# Java Class Files
+*.class
+
+# Logs
+*.log
+logs/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Environments and Secrets
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+*.p12
+
+# Application Specific
+backend/uploads/
+backend/target/
+frontend/node_modules/
+frontend/dist/
