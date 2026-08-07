@@ -1,212 +1,105 @@
-# 🏥 MedVault - Online Healthcare & Appointment Management System
+# MedVault – Secure Digital Medical Record Management System
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-SpringBoot-green?style=for-the-badge&logo=springboot">
-  <img src="https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react">
-  <img src="https://img.shields.io/badge/Database-MySQL-orange?style=for-the-badge&logo=mysql">
-  <img src="https://img.shields.io/badge/License-MIT-red?style=for-the-badge">
-</p>
+MedVault is a modern, secure, and scalable healthcare web application that allows patients, doctors, and administrators to securely store and share digital medical histories, clinical records, scans, prescriptions, and appointment bookings.
 
----
- 
-## 📖 About the Project
-
-**MedVault** is a healthcare web application that enables patients to securely manage their medical information and book appointments with doctors online. The system simplifies healthcare management by providing appointment scheduling, digital medical records, and doctor approval features in one platform.
-
-This project was developed to improve the efficiency of healthcare services while reducing paperwork and providing easy access to medical information. 
-
----
-
-## ✨ Features
-
-### 👤 Patient
-- User Registration & Login
-- Secure Authentication
-- Book Doctor Appointments
-- View Appointment History
-- Access Medical Records 
-- Update Profile
-
-### 👨‍⚕️ Doctor
-- Doctor Registration
-- Dashboard
-- View Patient Appointments
-- Manage Appointment Status
-- Upload Prescriptions
-
-### 👨‍💼 Admin
-- Admin Login
-- Doctor Verification & Approval
-- Manage Doctors
-- Monitor Users
-- Manage Appointments
-
----
-
-## 🛠 Tech Stack
-
-### Frontend
-- React.js
-- TypeScript
-- HTML5
-- CSS3
-- Tailwind CSS
-
-### Backend
-- Java
-- Spring Boot
-- Spring Security
-- REST API
-
-### Database
-- MySQL
-
-### Tools
-- Git
-- GitHub
-- VS Code
-- IntelliJ IDEA
-- Postman
-
----
-
-## 📂 Project Structure
-
+## Project Structure
 ```
 MedVault/
-│
-├── frontend/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── assets/
-│
-├── backend/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   └── config/
-│
-├── database/
-│   └── medvault.sql
-│
-└── README.md
+├── backend/          # Spring Boot 3 + Java 21 REST API
+├── frontend/         # React.js + Vite + Tailwind CSS v4 Dashboards
+├── database/         # MySQL 8 database schema & seed scripts
+├── docs/             # Technical architecture details
+└── README.md         # Setup and run guide
 ```
 
 ---
 
-## 🚀 Installation
+## Default Portals & Credentials
 
-### Clone Repository
+MedVault features three completely separate web portals using Role-Based Access Control (RBAC).
 
-```bash
-git clone https://github.com/your-username/MedVault.git
-```
+### 1. Admin Portal (`/admin/login`)
+Admin accounts cannot be self-registered and are locked down to administrative IP regions.
+- **Default Email**: `admin@gmail.com`
+- **Default Password**: `Admin@312`
+- **Default Role**: `ROLE_ADMIN`
 
-### Frontend
+### 2. Doctor Portal (`/doctor/login`)
+Doctor profiles are created, edited, or disabled only by the Admin.
+- **Sample Doctor Email**: `sarah.jenkins@medvault.com`
+- **Password**: `User@123`
+- **Default Role**: `ROLE_DOCTOR`
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Backend
-
-```bash
-cd backend
-mvn spring-boot:run
-```
-
----
-
-## 💻 Screenshots
-
-Add screenshots here.
-
-```
-Home Page
-
-Patient Dashboard
-
-Doctor Dashboard
-
-Admin Dashboard
-
-Appointment Booking
-
-Medical Records
-```
+### 3. Patient Portal (`/patient/login` or `/register` to self-register)
+Patients can sign up publicly, manage details, and download prescription PDFs.
+- **Sample Patient Email**: `john.doe@gmail.com`
+- **Password**: `User@123`
+- **Default Role**: `ROLE_PATIENT`
 
 ---
 
-## 🔐 Authentication
+## Setup & Deployment Guide
 
-- Patient Login
-- Doctor Login
-- Admin Login
-- Role-Based Access Control
-- Secure Password Storage
-
----
-
-## 📅 Future Enhancements
-
-- AI Healthcare Assistant
-- Video Consultation
-- Email Notifications
-- SMS Alerts
-- Online Payment Integration
-- Medical Report PDF Download
-- Dark Mode
-- Multi-language Support
+### Prerequisites
+- **Java SE Development Kit (JDK)**: Version 21
+- **Apache Maven**: Version 3.9+
+- **Node.js**: Version 20+ (with npm)
+- **MySQL Database Server**: Version 8.x
 
 ---
 
-## 🎯 Learning Outcomes
-
-- Full Stack Web Development
-- REST API Development
-- Authentication & Authorization
-- Database Design
-- Spring Boot Backend Development
-- React Frontend Development
-- Git Version Control
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-2. Create a new branch
-3. Commit your changes
-4. Push to your branch
-5. Open a Pull Request
+### Step 1: Database Setup
+1. Open your MySQL client and create the database:
+   ```sql
+   CREATE DATABASE medvault_db;
+   ```
+2. Run the schema creation and initial seeds:
+   ```bash
+   mysql -u root -p medvault_db < database/schema.sql
+   mysql -u root -p medvault_db < database/data.sql
+   ```
+   *(Note: The Super Admin account is seeded automatically by the Spring Boot backend on startup to ensure proper BCrypt encryption strength).*
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
+### Step 2: Backend Setup
+1. Navigate to the `backend/` directory:
+2. Open `src/main/resources/application.properties` and verify your local MySQL username and password:
+   ```properties
+   spring.datasource.username=root
+   spring.datasource.password=your_mysql_password
+   ```
+3. Build the backend using Maven:
+   ```bash
+   mvn clean package
+   ```
+4. Start the Spring Boot server:
+   ```bash
+   mvn spring-boot:run
+   ```
+   The backend will start on **`http://localhost:8080`**.
+   - **Swagger UI API docs**: `http://localhost:8080/swagger-ui/index.html`
+   - **REST API Entry Path**: `http://localhost:8080/api`
 
 ---
 
-## 👨‍💻 Developer
-
-**Akash**
-
-- Java Full Stack Developer
-- Spring Boot Developer
-- React Developer
-- UI/UX Enthusiast
-
-GitHub: https://github.com/Akashmagudeeswaran
-
-LinkedIn:www.linkedin.com/in/akash-magudeeswaran-357763336
+### Step 3: Frontend Setup
+1. Navigate to the `frontend/` directory:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the Vite development server:
+   ```bash
+   npm run dev
+   ```
+   The frontend application will boot up at **`http://localhost:5173`**.
 
 ---
 
-⭐ If you like this project, don't forget to **Star** the repository!
+## Security Implementations
+- **Stateless Authorization**: Secured via JSON Web Tokens (JWT).
+- **Password Protection**: Salted and encrypted using Spring Security's `BCryptPasswordEncoder`.
+- **IP Audit Logging**: Logs every database change, upload, registration, and login alongside client IP details.
+- **File Upload Limits**: Restricted to 20MB maximum. Support for PDF, JPG, PNG, and JPEG documents.
+- **Route Guards**: Enforced via React Router + JWT interceptors on the frontend, and Method Security (`@PreAuthorize`) in Spring controllers.

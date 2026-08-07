@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+  </defs>
+  <!-- Shield shape -->
+  <path d="M256 16L64 96v144c0 148.8 116.8 245.6 192 256 75.2-10.4 192-107.2 192-256V96L256 16z" fill="url(#shieldGrad)" />
+  <!-- Gloss overlay -->
+  <path d="M256 16v464c75.2-10.4 192-107.2 192-256V96L256 16z" fill="#ffffff" opacity="0.08" />
+  <!-- Medical Cross -->
+  <path d="M224 144h64v80h80v64h-80v80h-64v-80h-80v-64h80v-80z" fill="#ffffff" />
+</svg>
