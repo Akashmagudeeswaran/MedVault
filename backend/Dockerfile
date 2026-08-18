@@ -4,7 +4,7 @@ WORKDIR /app
 COPY pom.xml .
 # Download dependencies first (cached layer)
 RUN mvn dependency:go-offline -B
-COPY src ./src
+COPY src ./src 
 RUN mvn clean package -DskipTests
 
 # Run Stage
