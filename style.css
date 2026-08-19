@@ -4,7 +4,7 @@
 }
 
 .sidebar {
-  width: 250px; 
+  width: 250px;  
   height: 100vh;
   background: #0f172a;
   color: white; 
@@ -76,7 +76,7 @@ table td {
   border-radius: 10px;
 }
 
-.appointment-text {
+.appointment-t {
   margin-top: 20px;
 }
 }
