@@ -9,7 +9,7 @@ services:
     plan: starter # Private services require a paid instance type on Render
     envVars:
       - key: MYSQL_DATABASE
-        value: medvault_db
+        value: medvault_db 
       - key: MYSQL_ROOT_PASSWORD
         generateValue: true
     disk:
