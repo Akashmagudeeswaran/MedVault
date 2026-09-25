@@ -56,13 +56,14 @@ public class WebSecurityConfig {
                 .requestMatchers("/uploads/**").permitAll() // Allow serving static uploads
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 
-                // Role-based endpoints
+                // Role-based API endpoints
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/doctor/**").hasRole("DOCTOR")
                 .requestMatchers("/api/patient/**").hasRole("PATIENT")
-                
-                // Secure all other endpoints
-                .anyRequest().authenticated()
+                .requestMatchers("/api/**").authenticated()
+
+                // Permit all non-API requests (React frontend static files & SPA client routes)
+                .requestMatchers("/**").permitAll()
             );
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
