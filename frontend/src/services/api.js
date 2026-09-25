@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-export const BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || '';
-const API_BASE_URL = `${BASE_URL}/api`;
+// Dynamically determine API base URL
+// In production browser (non-localhost), force relative '/api' so it always hits the same server
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return '';
+  }
+  return import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || '';
+};
+
+export const BASE_URL = getBaseUrl();
+const API_BASE_URL = BASE_URL ? (BASE_URL.endsWith('/api') ? BASE_URL : `${BASE_URL}/api`) : '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
