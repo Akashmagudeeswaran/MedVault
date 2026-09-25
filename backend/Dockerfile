@@ -15,7 +15,6 @@ COPY backend/src ./src
 
 # Copy static output from React build stage into Spring Boot resources/static
 COPY --from=frontend-build /app/frontend/dist ./src/main/resources/static
-
 RUN mvn clean package -DskipTests
 
 # Stage 3: Runtime Stage

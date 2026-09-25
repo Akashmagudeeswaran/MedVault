@@ -27,7 +27,7 @@ Admin accounts cannot be self-registered and are locked down to administrative I
 ### 2. Doctor Portal (`/doctor/login`)
 Doctor profiles are created, edited, or disabled only by the Admin.
 - **Sample Doctor Email**: `sarah.jenkins@medvault.com`
-- **Password**: `User@123`
+- **Password**: `User@123` 
 - **Default Role**: `ROLE_DOCTOR`
 
 ### 3. Patient Portal (`/patient/login` or `/register` to self-register)
