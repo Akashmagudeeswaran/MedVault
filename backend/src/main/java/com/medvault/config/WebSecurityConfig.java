@@ -59,14 +59,13 @@ public class WebSecurityConfig {
                 .requestMatchers("/uploads/**").permitAll() // Allow serving static uploads
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 
-                // Role-based API endpoints
+                // Role-based endpoints
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/doctor/**").hasRole("DOCTOR")
                 .requestMatchers("/api/patient/**").hasRole("PATIENT")
-                .requestMatchers("/api/**").authenticated()
-
-                // Permit all non-API requests (React frontend static files & SPA client routes)
-                .requestMatchers("/**").permitAll()
+                
+                // Secure all other endpoints
+                .anyRequest().authenticated()
             );
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -78,12 +77,10 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Allow dynamic allowed origins configured via properties
-        if (allowedOrigins != null && allowedOrigins.contains("*")) {
-            configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
-        } else if (allowedOrigins != null && !allowedOrigins.trim().isEmpty()) {
+        if (allowedOrigins != null && !allowedOrigins.trim().isEmpty()) {
             configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
         } else {
-            configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
+            configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"));
         }
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers"));
